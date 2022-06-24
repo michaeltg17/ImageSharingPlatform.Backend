@@ -1,6 +1,6 @@
 using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
-using Application.Services.Implementations;
+using Application.Services.Interfaces;
 
 namespace ImageSharingPlatform.Controllers
 {
@@ -8,9 +8,9 @@ namespace ImageSharingPlatform.Controllers
     [Route("[controller]")]
     public class ImageController : ControllerBase
     {
-        readonly ImageService imageService;
+        readonly IImageService imageService;
 
-        public ImageController(ImageService imageService)
+        public ImageController(IImageService imageService)
         {
             this.imageService = imageService;
         }
@@ -19,6 +19,12 @@ namespace ImageSharingPlatform.Controllers
         public async Task<Image> Get(string id)
         {
             return await imageService.GetImage(id);
+        }
+
+        [HttpGet(Name = "SaveImage")]
+        public async Task SaveImage(IFormFile image)
+        {
+            await imageService.SaveImage();
         }
     }
 }

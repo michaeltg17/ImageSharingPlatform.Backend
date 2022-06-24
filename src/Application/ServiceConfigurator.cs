@@ -8,7 +8,7 @@ namespace Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddSingleton<IImageService, ImageService>();
+            services.AddScoped<IImageService, ImageService>();
 
             return services;
         }

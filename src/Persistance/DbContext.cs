@@ -9,12 +9,11 @@ namespace Persistance
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("filename=images");
+            optionsBuilder.UseInMemoryDatabase("database");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Image>().ToTable("images.db");
             builder.Entity<Image>(e => e.HasKey(e => e.Id));
 
             base.OnModelCreating(builder);

@@ -6,5 +6,6 @@ namespace Application.Services.Interfaces
     public interface IImageService
     {
         Task<Image> GetImage(string id);
+        Task SaveImage();
     }
 }

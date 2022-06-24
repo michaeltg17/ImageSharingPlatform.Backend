@@ -21,5 +21,10 @@ namespace Application.Services.Implementations
             await db.SaveChangesAsync();
             return image;
         }
+
+        public Task SaveImage()
+        {
+            return Task.CompletedTask;
+        }
     }
 }

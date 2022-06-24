@@ -1,4 +1,5 @@
 using Application;
+using Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
+builder.Services.AddPersistanceServices();
 
 var app = builder.Build();
 
