@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ImageSharingPlatform.csproj", "."]
-RUN dotnet restore "./ImageSharingPlatform.csproj"
+COPY ["Api.csproj", "."]
+RUN dotnet restore "./Api.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "ImageSharingPlatform.csproj" -c Release -o /app/build
+RUN dotnet build "Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ImageSharingPlatform.csproj" -c Release -o /app/publish
+RUN dotnet publish "Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ImageSharingPlatform.dll"]
+ENTRYPOINT ["dotnet", "Api.dll"]
