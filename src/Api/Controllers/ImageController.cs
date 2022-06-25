@@ -21,7 +21,7 @@ namespace ImageSharingPlatform.Controllers
             return await imageService.GetImage(id);
         }
 
-        [HttpGet(Name = "SaveImage")]
+        [HttpPost(Name = "SaveImage")]
         public async Task SaveImage(IFormFile image)
         {
             await imageService.SaveImage();
