@@ -22,9 +22,16 @@ namespace ImageSharingPlatform.Controllers
         }
 
         [HttpPost(Name = "SaveImage")]
-        public async Task SaveImage(IFormFile image)
+        public async Task<ImageGroup> SaveImage(IFormFile file)
         {
-            await imageService.SaveImage();
+            var image = new Image();
+            using (var ms = new MemoryStream())
+            {
+                file.CopyTo(ms);
+                image.Value = ms.ToArray();
+            }
+
+            await imageService.SaveImage(image);
         }
     }
 }

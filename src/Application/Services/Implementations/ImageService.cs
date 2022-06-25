@@ -2,6 +2,7 @@
 using Domain.Models;
 using System.Threading.Tasks;
 using Application.Services.Interfaces;
+using Application.Exceptions;
 
 namespace Application.Services.Implementations
 {
@@ -16,15 +17,15 @@ namespace Application.Services.Implementations
 
         public async Task<Image> GetImage(string id)
         {
-            var image = new Image() { Name = "myImage" };
-            db.Images.Add(image);
-            await db.SaveChangesAsync();
-            return image;
+            return await db.Images.FindAsync(id) ?? throw new ImageNotFoundException();
         }
 
-        public Task SaveImage()
+        public Task<ImageGroup> SaveImage(Image image)
         {
-            return Task.CompletedTask;
+            //Build images with their resolutions
+            var imageGroup = new ImageGroup();
+            imageGroup.Images.Add(image);
+            return imageGroup;
         }
     }
 }

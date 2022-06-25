@@ -15,6 +15,9 @@ namespace Persistance
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Image>(e => e.HasKey(e => e.Id));
+            builder.Entity<ImageGroup>(e => e.HasKey(e => e.Id));
+
+            builder.Entity<ImageGroup>(e => e.HasMany(i => i.Images).WithOne(i => i.Id);
 
             base.OnModelCreating(builder);
         }
