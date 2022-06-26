@@ -9,10 +9,14 @@ namespace ImageSharingPlatform.Controllers
     public class ImageController : ControllerBase
     {
         readonly IImageService imageService;
+        readonly IWebHostEnvironment webHostEnvironment;
 
-        public ImageController(IImageService imageService)
+        public ImageController(
+            IImageService imageService, 
+            IWebHostEnvironment webHostEnvironment)
         {
             this.imageService = imageService;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet(Name = "GetImage")]
@@ -24,14 +28,8 @@ namespace ImageSharingPlatform.Controllers
         [HttpPost(Name = "SaveImage")]
         public async Task<ImageGroup> SaveImage(IFormFile file)
         {
-            var image = new Image();
-            using (var ms = new MemoryStream())
-            {
-                file.CopyTo(ms);
-                image.Value = ms.ToArray();
-            }
-
-            await imageService.SaveImage(image);
+            //I didn't want to use IFormFile in the Application Project but 1 - Same server for storing and managing and 2 - Better than using an extra stream (performance)
+            return await imageService.SaveImage(file, webHostEnvironment.WebRootPath);
         }
     }
 }

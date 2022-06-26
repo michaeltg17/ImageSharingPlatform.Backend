@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain.Models
+﻿namespace Domain.Models
 {
-    internal class ImageResolution
+    public enum ImageResolution
     {
+        Avatar,
+        OriginalSize,
+        FullHd,
+        Hd
     }
 }
