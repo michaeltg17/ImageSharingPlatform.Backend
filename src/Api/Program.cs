@@ -14,6 +14,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistanceServices();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy
+    (
+        name: "AllowOrigin",
+        builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+    );
+});
+
 var app = builder.Build();
 
 app.UseStaticFiles();
@@ -28,6 +37,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors("AllowOrigin");
 
 app.MapControllers();
 

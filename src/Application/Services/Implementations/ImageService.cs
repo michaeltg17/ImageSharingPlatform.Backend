@@ -48,7 +48,7 @@ namespace Application.Services.Implementations
 
             var serverUrl = "https://localhost:49165/";
             image.Url = serverUrl + imageVirtualPath;
-            image.ImageResolution = resolution;
+            image.Resolution = resolution;
 
             return image;
         }

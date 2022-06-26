@@ -20,9 +20,9 @@ namespace Persistance
                 .HasKey(e => e.Id);
             builder
                 .Entity<Image>()
-                .HasOne(i => i.ImageGroup)
+                .HasOne(i => i.Group)
                 .WithMany(i => i.Images)
-                .HasForeignKey(i => i.ImageGroupId);
+                .HasForeignKey(i => i.GroupId);
 
             builder
                 .Entity<ImageGroup>()
@@ -30,8 +30,8 @@ namespace Persistance
             builder
                 .Entity<ImageGroup>()
                 .HasMany(i => i.Images)
-                .WithOne(i => i.ImageGroup)
-                .HasForeignKey(i => i.ImageGroupId);
+                .WithOne(i => i.Group)
+                .HasForeignKey(i => i.GroupId);
 
             base.OnModelCreating(builder);
         }
