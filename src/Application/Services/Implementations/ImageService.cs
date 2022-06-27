@@ -46,7 +46,7 @@ namespace Application.Services.Implementations
                 file.CopyTo(fs);
             }
 
-            var serverUrl = "https://localhost:49165/";
+            var serverUrl = "https://localhost:49163/";
             image.Url = serverUrl + imageVirtualPath;
             image.Resolution = resolution;
 
